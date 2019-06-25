@@ -1,0 +1,25 @@
+{
+  "waveAcsessConferenceApp": {
+    "room": {
+      "home": {
+        "title": "Rooms",
+        "createLabel": "Создать новый Room",
+        "createOrEditLabel": "Создать или отредактировать Room",
+        "notFound": "No Room found"
+      },
+      "created": "Новый Room создан с идентификатором {{ param }}",
+      "updated": "Room обновлен с идентификатором {{ param }}",
+      "deleted": "Room удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Room {{ id }}?"
+      },
+      "detail": {
+        "title": "Room"
+      },
+      "roomName": "Room Name",
+      "level": "Level",
+      "capacity": "Capacity",
+      "schedules": "Schedules"
+    }
+  }
+}

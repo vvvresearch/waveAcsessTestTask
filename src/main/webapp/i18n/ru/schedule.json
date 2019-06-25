@@ -1,0 +1,24 @@
+{
+  "waveAcsessConferenceApp": {
+    "schedule": {
+      "home": {
+        "title": "Schedules",
+        "createLabel": "Создать новый Schedule",
+        "createOrEditLabel": "Создать или отредактировать Schedule",
+        "notFound": "No Schedule found"
+      },
+      "created": "Новый Schedule создан с идентификатором {{ param }}",
+      "updated": "Schedule обновлен с идентификатором {{ param }}",
+      "deleted": "Schedule удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Schedule {{ id }}?"
+      },
+      "detail": {
+        "title": "Schedule"
+      },
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "room": "Room"
+    }
+  }
+}

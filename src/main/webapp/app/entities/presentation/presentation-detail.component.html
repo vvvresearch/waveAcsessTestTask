@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="presentation">
+            <h2><span jhiTranslate="waveAcsessConferenceApp.presentation.detail.title">Presentation</span> {{presentation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="waveAcsessConferenceApp.presentation.topic">Topic</span></dt>
+                <dd>
+                    <span>{{presentation.topic}}</span>
+                </dd>
+                <dt><span jhiTranslate="waveAcsessConferenceApp.presentation.description">Description</span></dt>
+                <dd>
+                    <span>{{presentation.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="waveAcsessConferenceApp.presentation.users">Users</span></dt>
+                <dd>
+                    <span *ngFor="let users of presentation.users; let last = last">
+                        {{users.login}}{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/presentation', presentation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

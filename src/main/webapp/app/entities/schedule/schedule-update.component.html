@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-schedule-heading" jhiTranslate="waveAcsessConferenceApp.schedule.home.createOrEditLabel">Create or edit a Schedule</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="waveAcsessConferenceApp.schedule.startTime" for="field_startTime">Start Time</label>
+                    <div class="input-group">
+                        <input id="field_startTime" type="text" class="form-control" name="startTime" ngbDatepicker  #startTimeDp="ngbDatepicker" formControlName="startTime"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="startTimeDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('startTime').invalid && (editForm.get('startTime').dirty || editForm.get('startTime').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('startTime').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="waveAcsessConferenceApp.schedule.endTime" for="field_endTime">End Time</label>
+                    <div class="input-group">
+                        <input id="field_endTime" type="text" class="form-control" name="endTime" ngbDatepicker  #endTimeDp="ngbDatepicker" formControlName="endTime"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="endTimeDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('endTime').invalid && (editForm.get('endTime').dirty || editForm.get('endTime').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('endTime').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="waveAcsessConferenceApp.schedule.room" for="field_room">Room</label>
+                    <select class="form-control" id="field_room" name="room" formControlName="room">
+                        <option *ngIf="!editForm.get('room').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="roomOption.id === editForm.get('room').value?.id ? editForm.get('room').value : roomOption" *ngFor="let roomOption of rooms; trackBy: trackRoomById">{{roomOption.id}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('room').invalid && (editForm.get('room').dirty || editForm.get('room').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('room').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
