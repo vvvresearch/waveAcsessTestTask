@@ -37,7 +37,7 @@ export const presentationRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_LISTENER'],
       defaultSort: 'id,asc',
       pageTitle: 'waveAcsessConferenceApp.presentation.home.title'
     },
@@ -50,7 +50,7 @@ export const presentationRoute: Routes = [
       presentation: PresentationResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_LISTENER'],
       pageTitle: 'waveAcsessConferenceApp.presentation.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const presentationRoute: Routes = [
       presentation: PresentationResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.presentation.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const presentationRoute: Routes = [
       presentation: PresentationResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.presentation.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const presentationPopupRoute: Routes = [
       presentation: PresentationResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.presentation.home.title'
     },
     canActivate: [UserRouteAccessService],

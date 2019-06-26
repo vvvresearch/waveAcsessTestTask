@@ -50,8 +50,8 @@ describe('Service Tests', () => {
         });
         const req = httpMock.expectOne({ method: 'GET' });
 
-        req.flush(['ROLE_USER', 'ROLE_ADMIN']);
-        expect(expectedResult).toEqual(['ROLE_USER', 'ROLE_ADMIN']);
+        req.flush(['ROLE_LISTENER', 'ROLE_ADMIN']);
+        expect(expectedResult).toEqual(['ROLE_LISTENER', 'ROLE_ADMIN']);
       });
 
       it('should propagate not found response', () => {

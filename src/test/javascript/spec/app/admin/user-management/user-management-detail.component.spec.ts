@@ -51,7 +51,7 @@ describe('Component Tests', () => {
             email: 'first@last.com',
             activated: true,
             langKey: 'en',
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_LISTENER'],
             createdBy: 'admin',
             createdDate: null,
             lastModifiedBy: null,

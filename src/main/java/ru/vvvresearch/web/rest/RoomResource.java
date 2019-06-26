@@ -1,6 +1,8 @@
 package ru.vvvresearch.web.rest;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import ru.vvvresearch.domain.Room;
+import ru.vvvresearch.security.AuthoritiesConstants;
 import ru.vvvresearch.service.RoomService;
 import ru.vvvresearch.web.rest.errors.BadRequestAlertException;
 
