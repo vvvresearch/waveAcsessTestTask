@@ -10,6 +10,7 @@ import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { RoomService } from './room.service';
+import { ISchedule } from 'app/shared/model/schedule.model';
 
 @Component({
   selector: 'jhi-room',

@@ -30,7 +30,7 @@ public class Room implements Serializable {
     @Column(name = "capacity")
     private Integer capacity;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "room")
     private Set<Schedule> schedules = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
