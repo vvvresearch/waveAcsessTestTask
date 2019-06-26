@@ -73,6 +73,9 @@
             <thead>
             <tr>
                 <th>
+                    <span jhiTranslate="waveAcsessConferenceApp.presentation.topic">Topic</span>
+                </th>
+                <th>
                     <span jhiTranslate="waveAcsessConferenceApp.schedule.startTime">startTime</span>
                 </th>
                 <th ><span jhiTranslate="waveAcsessConferenceApp.schedule.endTime">endTime</span>
@@ -81,6 +84,7 @@
             </thead>
             <tbody>
             <tr>
+                <td>{{schedule.presentation.topic}}</td>
                 <td>{{schedule.startTime}}</td>
                 <td>{{schedule.endTime}}</td>
             </tr>

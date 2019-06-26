@@ -2,7 +2,6 @@ package ru.vvvresearch.web.rest;
 
 import ru.vvvresearch.WaveAcsessConferenceApp;
 import ru.vvvresearch.domain.Schedule;
-import ru.vvvresearch.domain.Room;
 import ru.vvvresearch.repository.ScheduleRepository;
 import ru.vvvresearch.service.ScheduleService;
 import ru.vvvresearch.web.rest.errors.ExceptionTranslator;
@@ -90,16 +89,6 @@ public class ScheduleResourceIT {
         Schedule schedule = new Schedule()
             .startTime(DEFAULT_START_TIME)
             .endTime(DEFAULT_END_TIME);
-        // Add required entity
-        Room room;
-        if (TestUtil.findAll(em, Room.class).isEmpty()) {
-            room = RoomResourceIT.createEntity(em);
-            em.persist(room);
-            em.flush();
-        } else {
-            room = TestUtil.findAll(em, Room.class).get(0);
-        }
-        schedule.setRoom(room);
         return schedule;
     }
     /**
@@ -112,16 +101,6 @@ public class ScheduleResourceIT {
         Schedule schedule = new Schedule()
             .startTime(UPDATED_START_TIME)
             .endTime(UPDATED_END_TIME);
-        // Add required entity
-        Room room;
-        if (TestUtil.findAll(em, Room.class).isEmpty()) {
-            room = RoomResourceIT.createUpdatedEntity(em);
-            em.persist(room);
-            em.flush();
-        } else {
-            room = TestUtil.findAll(em, Room.class).get(0);
-        }
-        schedule.setRoom(room);
         return schedule;
     }
 

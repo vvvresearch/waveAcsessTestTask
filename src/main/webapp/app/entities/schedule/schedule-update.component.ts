@@ -8,6 +8,8 @@ import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { ISchedule, Schedule } from 'app/shared/model/schedule.model';
 import { ScheduleService } from './schedule.service';
+import { IPresentation } from 'app/shared/model/presentation.model';
+import { PresentationService } from 'app/entities/presentation';
 import { IRoom } from 'app/shared/model/room.model';
 import { RoomService } from 'app/entities/room';
 
@@ -18,6 +20,8 @@ import { RoomService } from 'app/entities/room';
 export class ScheduleUpdateComponent implements OnInit {
   isSaving: boolean;
 
+  presentations: IPresentation[];
+
   rooms: IRoom[];
   startTimeDp: any;
   endTimeDp: any;
@@ -26,12 +30,14 @@ export class ScheduleUpdateComponent implements OnInit {
     id: [],
     startTime: [null, [Validators.required]],
     endTime: [null, [Validators.required]],
-    room: [null, Validators.required]
+    presentation: [],
+    room: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected scheduleService: ScheduleService,
+    protected presentationService: PresentationService,
     protected roomService: RoomService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -42,6 +48,13 @@ export class ScheduleUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ schedule }) => {
       this.updateForm(schedule);
     });
+    this.presentationService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IPresentation[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IPresentation[]>) => response.body)
+      )
+      .subscribe((res: IPresentation[]) => (this.presentations = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.roomService
       .query()
       .pipe(
@@ -56,6 +69,7 @@ export class ScheduleUpdateComponent implements OnInit {
       id: schedule.id,
       startTime: schedule.startTime,
       endTime: schedule.endTime,
+      presentation: schedule.presentation,
       room: schedule.room
     });
   }
@@ -80,6 +94,7 @@ export class ScheduleUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       startTime: this.editForm.get(['startTime']).value,
       endTime: this.editForm.get(['endTime']).value,
+      presentation: this.editForm.get(['presentation']).value,
       room: this.editForm.get(['room']).value
     };
   }
@@ -98,6 +113,10 @@ export class ScheduleUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackPresentationById(index: number, item: IPresentation) {
+    return item.id;
   }
 
   trackRoomById(index: number, item: IRoom) {

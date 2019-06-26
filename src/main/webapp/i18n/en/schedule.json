@@ -18,6 +18,7 @@
       },
       "startTime": "Start Time",
       "endTime": "End Time",
+      "presentation": "Presentation",
       "room": "Room"
     }
   }

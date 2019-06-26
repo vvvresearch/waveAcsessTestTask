@@ -20,6 +20,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="startTime"><span jhiTranslate="waveAcsessConferenceApp.schedule.startTime">Start Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="endTime"><span jhiTranslate="waveAcsessConferenceApp.schedule.endTime">End Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="presentation.id"><span jhiTranslate="waveAcsessConferenceApp.schedule.presentation">Presentation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="room.id"><span jhiTranslate="waveAcsessConferenceApp.schedule.room">Room</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -29,6 +30,11 @@
                 <td><a [routerLink]="['/schedule', schedule.id, 'view' ]">{{schedule.id}}</a></td>
                 <td>{{schedule.startTime | date:'mediumDate'}}</td>
                 <td>{{schedule.endTime | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="schedule.presentation">
+                        <a [routerLink]="['../presentation', schedule.presentation?.id, 'view' ]" >{{schedule.presentation?.id}}</a>
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="schedule.room">
                         <a [routerLink]="['../room', schedule.room?.id, 'view' ]" >{{schedule.room?.id}}</a>

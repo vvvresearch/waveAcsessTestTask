@@ -28,8 +28,11 @@ public class Schedule implements Serializable {
     @Column(name = "end_time", nullable = false)
     private LocalDate endTime;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne
+    @JsonIgnoreProperties("schedules")
+    private Presentation presentation;
+
+    @ManyToOne
     @JsonIgnoreProperties("schedules")
     private Room room;
 
@@ -66,6 +69,19 @@ public class Schedule implements Serializable {
 
     public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
+    }
+
+    public Presentation getPresentation() {
+        return presentation;
+    }
+
+    public Schedule presentation(Presentation presentation) {
+        this.presentation = presentation;
+        return this;
+    }
+
+    public void setPresentation(Presentation presentation) {
+        this.presentation = presentation;
     }
 
     public Room getRoom() {
