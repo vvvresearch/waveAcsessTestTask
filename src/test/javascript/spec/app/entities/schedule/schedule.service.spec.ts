@@ -5,7 +5,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { ScheduleService } from 'app/entities/schedule/schedule.service';
 import { ISchedule, Schedule } from 'app/shared/model/schedule.model';
 
@@ -34,8 +34,8 @@ describe('Service Tests', () => {
       it('should find an element', async () => {
         const returnedFromService = Object.assign(
           {
-            startTime: currentDate.format(DATE_FORMAT),
-            endTime: currentDate.format(DATE_FORMAT)
+            startTime: currentDate.format(DATE_TIME_FORMAT),
+            endTime: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -53,8 +53,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            startTime: currentDate.format(DATE_FORMAT),
-            endTime: currentDate.format(DATE_FORMAT)
+            startTime: currentDate.format(DATE_TIME_FORMAT),
+            endTime: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -77,8 +77,8 @@ describe('Service Tests', () => {
       it('should update a Schedule', async () => {
         const returnedFromService = Object.assign(
           {
-            startTime: currentDate.format(DATE_FORMAT),
-            endTime: currentDate.format(DATE_FORMAT)
+            startTime: currentDate.format(DATE_TIME_FORMAT),
+            endTime: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -102,8 +102,8 @@ describe('Service Tests', () => {
       it('should return a list of Schedule', async () => {
         const returnedFromService = Object.assign(
           {
-            startTime: currentDate.format(DATE_FORMAT),
-            endTime: currentDate.format(DATE_FORMAT)
+            startTime: currentDate.format(DATE_TIME_FORMAT),
+            endTime: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );

@@ -17,11 +17,11 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="topic" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="description" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="true"/>
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
@@ -40,8 +40,9 @@
             </column>
         </createTable>
 
+
         <addPrimaryKey columnNames="presentation_id, users_id" tableName="presentation_users"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
@@ -55,14 +56,20 @@
     -->
     <changeSet id="20190625070443-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/data/presentation.csv"
-                  separator=";"
-                  tableName="presentation">
+            file="config/liquibase/data/presentation.csv"
+            separator=";"
+            tableName="presentation">
             <column name="id" type="numeric"/>
             <column name="topic" type="string"/>
             <column name="description" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
+    </changeSet>
+    <changeSet id="20190625070443-2-data" author="jhipster" context="faker">
+        <loadData
+            file="config/liquibase/data/presentation_users.csv"
+            separator=";"
+            tableName="presentation_users"/>
     </changeSet>
 
 </databaseChangeLog>

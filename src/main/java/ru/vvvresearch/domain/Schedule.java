@@ -2,10 +2,9 @@ package ru.vvvresearch.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 /**
  * A Schedule.
@@ -20,13 +19,11 @@ public class Schedule implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(name = "start_time", nullable = false)
-    private LocalDate startTime;
+    @Column(name = "start_time")
+    private ZonedDateTime startTime;
 
-    @NotNull
-    @Column(name = "end_time", nullable = false)
-    private LocalDate endTime;
+    @Column(name = "end_time")
+    private ZonedDateTime endTime;
 
     @ManyToOne
     @JsonIgnoreProperties("schedules")
@@ -45,29 +42,29 @@ public class Schedule implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getStartTime() {
+    public ZonedDateTime getStartTime() {
         return startTime;
     }
 
-    public Schedule startTime(LocalDate startTime) {
+    public Schedule startTime(ZonedDateTime startTime) {
         this.startTime = startTime;
         return this;
     }
 
-    public void setStartTime(LocalDate startTime) {
+    public void setStartTime(ZonedDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDate getEndTime() {
+    public ZonedDateTime getEndTime() {
         return endTime;
     }
 
-    public Schedule endTime(LocalDate endTime) {
+    public Schedule endTime(ZonedDateTime endTime) {
         this.endTime = endTime;
         return this;
     }
 
-    public void setEndTime(LocalDate endTime) {
+    public void setEndTime(ZonedDateTime endTime) {
         this.endTime = endTime;
     }
 

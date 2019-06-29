@@ -37,7 +37,7 @@ export const scheduleRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_LISTENER', 'ROLE_PRESENTER', 'ROLE_ADMIN'],
       defaultSort: 'id,asc',
       pageTitle: 'waveAcsessConferenceApp.schedule.home.title'
     },
@@ -50,7 +50,7 @@ export const scheduleRoute: Routes = [
       schedule: ScheduleResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_LISTENER', 'ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.schedule.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const scheduleRoute: Routes = [
       schedule: ScheduleResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.schedule.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const scheduleRoute: Routes = [
       schedule: ScheduleResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.schedule.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const schedulePopupRoute: Routes = [
       schedule: ScheduleResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.schedule.home.title'
     },
     canActivate: [UserRouteAccessService],

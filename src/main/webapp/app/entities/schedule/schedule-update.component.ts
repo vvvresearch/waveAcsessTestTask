@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 import { ISchedule, Schedule } from 'app/shared/model/schedule.model';
 import { ScheduleService } from './schedule.service';
@@ -23,13 +24,11 @@ export class ScheduleUpdateComponent implements OnInit {
   presentations: IPresentation[];
 
   rooms: IRoom[];
-  startTimeDp: any;
-  endTimeDp: any;
 
   editForm = this.fb.group({
     id: [],
-    startTime: [null, [Validators.required]],
-    endTime: [null, [Validators.required]],
+    startTime: [],
+    endTime: [],
     presentation: [],
     room: []
   });
@@ -67,8 +66,8 @@ export class ScheduleUpdateComponent implements OnInit {
   updateForm(schedule: ISchedule) {
     this.editForm.patchValue({
       id: schedule.id,
-      startTime: schedule.startTime,
-      endTime: schedule.endTime,
+      startTime: schedule.startTime != null ? schedule.startTime.format(DATE_TIME_FORMAT) : null,
+      endTime: schedule.endTime != null ? schedule.endTime.format(DATE_TIME_FORMAT) : null,
       presentation: schedule.presentation,
       room: schedule.room
     });
@@ -92,8 +91,9 @@ export class ScheduleUpdateComponent implements OnInit {
     return {
       ...new Schedule(),
       id: this.editForm.get(['id']).value,
-      startTime: this.editForm.get(['startTime']).value,
-      endTime: this.editForm.get(['endTime']).value,
+      startTime:
+        this.editForm.get(['startTime']).value != null ? moment(this.editForm.get(['startTime']).value, DATE_TIME_FORMAT) : undefined,
+      endTime: this.editForm.get(['endTime']).value != null ? moment(this.editForm.get(['endTime']).value, DATE_TIME_FORMAT) : undefined,
       presentation: this.editForm.get(['presentation']).value,
       room: this.editForm.get(['room']).value
     };

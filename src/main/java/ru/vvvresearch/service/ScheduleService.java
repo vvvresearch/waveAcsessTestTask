@@ -4,6 +4,7 @@ import ru.vvvresearch.domain.Schedule;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import ru.vvvresearch.service.error.BadTimeForScheduleEntity;
 
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public interface ScheduleService {
      * @param schedule the entity to save.
      * @return the persisted entity.
      */
-    Schedule save(Schedule schedule);
+    Schedule save(Schedule schedule) throws BadTimeForScheduleEntity;
 
     /**
      * Get all the schedules.

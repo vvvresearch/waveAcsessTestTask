@@ -7,9 +7,9 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Сущности",
-        "room": "Room",
-        "schedule": "Schedule",
-        "presentation": "Presentation",
+        "room": "Аудитории",
+        "schedule": "Расписание",
+        "presentation": "Доклады",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -132,7 +132,8 @@
     "userexists": "Имя пользователя уже используется!",
     "emailexists": "Эл. почта уже используется!!",
     "idexists": "Новый {{entityName}} не может иметь данный ID",
-    "idnull": "Неверный ID"
+    "idnull": "Неверный ID",
+    "scheduleexists": "Время в аудитории занято. Попробуйте выбрать другую аудиторию или время"
   },
   "footer": "Это ваш футтер"
 }

@@ -133,7 +133,8 @@
     "userexists": "Login name already used!",
     "emailexists": "Email is already in use!",
     "idexists": "A new {{ entityName }} cannot already have an ID",
-    "idnull": "Invalid ID"
+    "idnull": "Invalid ID",
+    "scheduleexists": "Room is busy at this time. Please change a room or time"
   },
   "footer": "This is your footer"
 }

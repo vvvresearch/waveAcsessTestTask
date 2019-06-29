@@ -28,16 +28,16 @@
             <tbody>
             <tr *ngFor="let schedule of schedules ;trackBy: trackId">
                 <td><a [routerLink]="['/schedule', schedule.id, 'view' ]">{{schedule.id}}</a></td>
-                <td>{{schedule.startTime | date:'mediumDate'}}</td>
-                <td>{{schedule.endTime | date:'mediumDate'}}</td>
+                <td>{{schedule.startTime | date:'HH:mm dd.MM.yyyy'}}</td>
+                <td>{{schedule.endTime | date:'HH:mm dd.MM.yyyy'}}</td>
                 <td>
                     <div *ngIf="schedule.presentation">
-                        <a [routerLink]="['../presentation', schedule.presentation?.id, 'view' ]" >{{schedule.presentation?.id}}</a>
+                        <a [routerLink]="['../presentation', schedule.presentation?.topic, 'view' ]" >{{schedule.presentation?.topic}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="schedule.room">
-                        <a [routerLink]="['../room', schedule.room?.id, 'view' ]" >{{schedule.room?.id}}</a>
+                        <a [routerLink]="['../room', schedule.room?.roomName, 'view' ]" >{{schedule.room?.roomName}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -77,3 +77,4 @@
         </div>
     </div>
 </div>
+

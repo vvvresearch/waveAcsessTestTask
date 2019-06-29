@@ -7,22 +7,22 @@
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="waveAcsessConferenceApp.schedule.startTime">Start Time</span></dt>
                 <dd>
-                    <span>{{schedule.startTime}}</span>
+                    <span>{{schedule.startTime | date: 'HH:mm dd.MM.yyyy'}}</span>
                 </dd>
                 <dt><span jhiTranslate="waveAcsessConferenceApp.schedule.endTime">End Time</span></dt>
                 <dd>
-                    <span>{{schedule.endTime}}</span>
+                    <span>{{schedule.endTime | date: 'HH:mm dd.MM.yyyy'}}</span>
                 </dd>
                 <dt><span jhiTranslate="waveAcsessConferenceApp.schedule.presentation">Presentation</span></dt>
                 <dd>
                     <div *ngIf="schedule.presentation">
-                        <a [routerLink]="['/presentation', schedule.presentation?.id, 'view']">{{schedule.presentation?.id}}</a>
+                        <a [routerLink]="['/presentation', schedule.presentation?.id, 'view']">{{schedule.presentation?.topic}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="waveAcsessConferenceApp.schedule.room">Room</span></dt>
                 <dd>
                     <div *ngIf="schedule.room">
-                        <a [routerLink]="['/room', schedule.room?.id, 'view']">{{schedule.room?.id}}</a>
+                        <a [routerLink]="['/room', schedule.room?.id, 'view']">{{schedule.room?.roomName}}</a>
                     </div>
                 </dd>
             </dl>

@@ -1,92 +1,43 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="waveAcsessConferenceApp.room.home.title">Rooms</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-room"
-                [routerLink]="['/room/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span jhiTranslate="waveAcsessConferenceApp.room.home.createLabel">
-            Create new Room
-            </span>
-        </button>
-    </h2>
+    <h1 id="page-heading">
+        <span jhiTranslate="waveAcsessConferenceApp.room.home.title"><h1>Schedule of presentation by room</h1></span>
+    </h1>
     <jhi-alert></jhi-alert>
     <br/>
     <div class="alert alert-warning" *ngIf="rooms?.length === 0">
         <span jhiTranslate="waveAcsessConferenceApp.room.home.notFound">No rooms found</span>
     </div>
-    <div class="table-responsive" *ngIf="rooms?.length > 0">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="roomName"><span jhiTranslate="waveAcsessConferenceApp.room.roomName">Room Name</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="level"><span jhiTranslate="waveAcsessConferenceApp.room.level">Level</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="capacity"><span jhiTranslate="waveAcsessConferenceApp.room.capacity">Capacity</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let room of rooms ;trackBy: trackId">
-                <td><a [routerLink]="['/room', room.id, 'view' ]">{{room.id}}</a></td>
-                <td>{{room.roomName}}</td>
-                <td>{{room.level}}</td>
-                <td>{{room.capacity}}</td>
-                <td class="text-right">
-                    <div class="btn-group">
-                        <button type="submit"
-                                [routerLink]="['/room', room.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/room', room.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'room', { outlets: { popup: room.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+
     <div *ngFor="let room of rooms">
-        <h1>{{room.roomName}}</h1>
-        <table class="table table-striped" *ngFor="let schedule of room.schedules">
+
+
+        <h3><span jhiTranslate = "waveAcsessConferenceApp.room.detail.title">Room </span> {{room.roomName}}</h3>
+
+        <table class="table table-striped" >
             <thead>
-            <tr>
+            <tr >
                 <th>
                     <span jhiTranslate="waveAcsessConferenceApp.presentation.topic">Topic</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
                 <th>
                     <span jhiTranslate="waveAcsessConferenceApp.schedule.startTime">startTime</span>
                 </th>
-                <th ><span jhiTranslate="waveAcsessConferenceApp.schedule.endTime">endTime</span>
+                <th><span jhiTranslate="waveAcsessConferenceApp.schedule.endTime">endTime</span>
                 </th>
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr *ngFor="let schedule of room.schedules">
                 <td>{{schedule.presentation.topic}}</td>
-                <td>{{schedule.startTime}}</td>
-                <td>{{schedule.endTime}}</td>
+                <td>{{schedule.startTime | date:'HH:mm dd.MM.yyyy'}}</td>
+                <td>{{schedule.endTime | date:'HH:mm dd.MM.yyyy'}}</td>
+                <td class="text-right"><button type="submit"
+                            [routerLink]="['/schedule', schedule.id, 'view' ]"
+                            class="btn btn-info btn-sm">
+                    <fa-icon [icon]="'eye'"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                </button></td>
             </tr>
             </tbody>
         </table>

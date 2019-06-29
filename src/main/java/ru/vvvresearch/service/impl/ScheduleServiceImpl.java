@@ -10,7 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.vvvresearch.service.error.BadTimeForScheduleEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -35,9 +37,14 @@ public class ScheduleServiceImpl implements ScheduleService {
      * @return the persisted entity.
      */
     @Override
-    public Schedule save(Schedule schedule) {
+    public Schedule save(Schedule schedule) throws BadTimeForScheduleEntity {
         log.debug("Request to save Schedule : {}", schedule);
-        return scheduleRepository.save(schedule);
+//        List<Schedule> schedules = scheduleRepository.findSchedulesByStartTimeIsBetweenAndRoom(schedule.getStartTime(),schedule.getEndTime(),schedule.getRoom());
+//        schedules.forEach(schedule1 -> {log.debug(schedule1.toString());});
+        if (!scheduleRepository.existsScheduleByStartTimeBetweenAndRoom(schedule.getStartTime(),schedule.getEndTime(),schedule.getRoom())) {
+            return scheduleRepository.save(schedule);
+        }
+        else throw new BadTimeForScheduleEntity();
     }
 
     /**

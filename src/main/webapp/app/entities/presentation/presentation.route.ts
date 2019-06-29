@@ -37,7 +37,7 @@ export const presentationRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_LISTENER'],
+      authorities: ['ROLE_LISTENER', 'ROLE_PRESENTER', 'ROLE_ADMIN'],
       defaultSort: 'id,asc',
       pageTitle: 'waveAcsessConferenceApp.presentation.home.title'
     },
@@ -50,7 +50,7 @@ export const presentationRoute: Routes = [
       presentation: PresentationResolve
     },
     data: {
-      authorities: ['ROLE_LISTENER'],
+      authorities: ['ROLE_LISTENER', 'ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.presentation.home.title'
     },
     canActivate: [UserRouteAccessService]

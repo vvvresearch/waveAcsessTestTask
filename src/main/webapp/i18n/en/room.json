@@ -2,7 +2,7 @@
   "waveAcsessConferenceApp": {
     "room": {
       "home": {
-        "title": "Rooms",
+        "title": "Schedule of presentation by room",
         "createLabel": "Create a new Room",
         "createOrEditLabel": "Create or edit a Room",
         "notFound": "No Room found"

@@ -27,6 +27,7 @@ const ENTITY_STATES = [...scheduleRoute, ...schedulePopupRoute];
   ],
   entryComponents: [ScheduleComponent, ScheduleUpdateComponent, ScheduleDeleteDialogComponent, ScheduleDeletePopupComponent],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
+  exports: [ScheduleDetailComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class WaveAcsessConferenceScheduleModule {

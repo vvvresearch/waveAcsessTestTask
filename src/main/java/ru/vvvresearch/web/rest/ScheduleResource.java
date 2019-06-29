@@ -1,7 +1,10 @@
 package ru.vvvresearch.web.rest;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import ru.vvvresearch.domain.Schedule;
+import ru.vvvresearch.security.AuthoritiesConstants;
 import ru.vvvresearch.service.ScheduleService;
+import ru.vvvresearch.service.error.BadTimeForScheduleEntity;
 import ru.vvvresearch.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -19,7 +22,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -31,7 +33,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
-public class ScheduleResource {
+public class  ScheduleResource {
 
     private final Logger log = LoggerFactory.getLogger(ScheduleResource.class);
 
@@ -54,12 +56,18 @@ public class ScheduleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/schedules")
-    public ResponseEntity<Schedule> createSchedule(@Valid @RequestBody Schedule schedule) throws URISyntaxException {
+    @PreAuthorize("hasAnyRole(\"" + AuthoritiesConstants.ADMIN +","+AuthoritiesConstants.PRESENTER+ "\")")
+    public ResponseEntity<Schedule> createSchedule(@RequestBody Schedule schedule) throws URISyntaxException {
         log.debug("REST request to save Schedule : {}", schedule);
         if (schedule.getId() != null) {
             throw new BadRequestAlertException("A new schedule cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Schedule result = scheduleService.save(schedule);
+        Schedule result = null;
+        try {
+            result = scheduleService.save(schedule);
+        } catch (BadTimeForScheduleEntity badTimeForScheduleEntity) {
+            throw new BadRequestAlertException("A new schedule cannot be added", ENTITY_NAME, "scheduleexists");
+        }
         return ResponseEntity.created(new URI("/api/schedules/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -75,12 +83,18 @@ public class ScheduleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/schedules")
-    public ResponseEntity<Schedule> updateSchedule(@Valid @RequestBody Schedule schedule) throws URISyntaxException {
+    @PreAuthorize("hasAnyRole(\"" + AuthoritiesConstants.ADMIN +","+AuthoritiesConstants.PRESENTER+ "\")")
+    public ResponseEntity<Schedule> updateSchedule(@RequestBody Schedule schedule) throws URISyntaxException {
         log.debug("REST request to update Schedule : {}", schedule);
         if (schedule.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Schedule result = scheduleService.save(schedule);
+        Schedule result = null;
+        try {
+            result = scheduleService.save(schedule);
+        } catch (BadTimeForScheduleEntity badTimeForScheduleEntity) {
+            throw new BadRequestAlertException("A schedule cannot be updated", ENTITY_NAME, "scheduleexists");
+        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, schedule.getId().toString()))
             .body(result);
@@ -122,6 +136,7 @@ public class ScheduleResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/schedules/{id}")
+    @PreAuthorize("hasAnyRole(\"" + AuthoritiesConstants.ADMIN +","+AuthoritiesConstants.PRESENTER+ "\")")
     public ResponseEntity<Void> deleteSchedule(@PathVariable Long id) {
         log.debug("REST request to delete Schedule : {}", id);
         scheduleService.delete(id);

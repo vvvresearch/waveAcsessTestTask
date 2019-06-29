@@ -37,7 +37,7 @@ export const roomRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_LISTENER'],
+      authorities: ['ROLE_LISTENER', 'ROLE_PRESENTER', 'ROLE_ADMIN'],
       defaultSort: 'id,asc',
       pageTitle: 'waveAcsessConferenceApp.room.home.title'
     },
@@ -50,7 +50,7 @@ export const roomRoute: Routes = [
       room: RoomResolve
     },
     data: {
-      authorities: ['ROLE_LISTENER'],
+      authorities: ['ROLE_LISTENER', 'ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.room.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const roomRoute: Routes = [
       room: RoomResolve
     },
     data: {
-      authorities: ['ROLE_LISTENER'],
+      authorities: ['ROLE_LISTENER', 'ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.room.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const roomRoute: Routes = [
       room: RoomResolve
     },
     data: {
-      authorities: ['ROLE_LISTENER'],
+      authorities: ['ROLE_LISTENER', 'ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.room.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const roomPopupRoute: Routes = [
       room: RoomResolve
     },
     data: {
-      authorities: ['ROLE_LISTENER'],
+      authorities: ['ROLE_LISTENER', 'ROLE_PRESENTER', 'ROLE_ADMIN'],
       pageTitle: 'waveAcsessConferenceApp.room.home.title'
     },
     canActivate: [UserRouteAccessService],

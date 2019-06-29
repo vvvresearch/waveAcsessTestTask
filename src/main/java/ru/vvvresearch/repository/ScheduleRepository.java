@@ -1,8 +1,12 @@
 package ru.vvvresearch.repository;
 
+import ru.vvvresearch.domain.Room;
 import ru.vvvresearch.domain.Schedule;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
+
+import java.time.ZonedDateTime;
+import java.util.List;
 
 
 /**
@@ -10,6 +14,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
-
+public interface ScheduleRepository extends JpaRepository<Schedule, Long>{
+    boolean existsScheduleByStartTimeBetweenAndRoom(ZonedDateTime startTime, ZonedDateTime startTime2, Room room);
 }

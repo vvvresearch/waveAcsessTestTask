@@ -20,10 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
 import java.time.ZoneId;
 import java.util.List;
 
+import static ru.vvvresearch.web.rest.TestUtil.sameInstant;
 import static ru.vvvresearch.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -36,11 +39,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = WaveAcsessConferenceApp.class)
 public class ScheduleResourceIT {
 
-    private static final LocalDate DEFAULT_START_TIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_START_TIME = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_START_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_START_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final LocalDate DEFAULT_END_TIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_END_TIME = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_END_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_END_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private ScheduleRepository scheduleRepository;
@@ -150,42 +153,6 @@ public class ScheduleResourceIT {
 
     @Test
     @Transactional
-    public void checkStartTimeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = scheduleRepository.findAll().size();
-        // set the field null
-        schedule.setStartTime(null);
-
-        // Create the Schedule, which fails.
-
-        restScheduleMockMvc.perform(post("/api/schedules")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(schedule)))
-            .andExpect(status().isBadRequest());
-
-        List<Schedule> scheduleList = scheduleRepository.findAll();
-        assertThat(scheduleList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkEndTimeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = scheduleRepository.findAll().size();
-        // set the field null
-        schedule.setEndTime(null);
-
-        // Create the Schedule, which fails.
-
-        restScheduleMockMvc.perform(post("/api/schedules")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(schedule)))
-            .andExpect(status().isBadRequest());
-
-        List<Schedule> scheduleList = scheduleRepository.findAll();
-        assertThat(scheduleList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllSchedules() throws Exception {
         // Initialize the database
         scheduleRepository.saveAndFlush(schedule);
@@ -195,8 +162,8 @@ public class ScheduleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(schedule.getId().intValue())))
-            .andExpect(jsonPath("$.[*].startTime").value(hasItem(DEFAULT_START_TIME.toString())))
-            .andExpect(jsonPath("$.[*].endTime").value(hasItem(DEFAULT_END_TIME.toString())));
+            .andExpect(jsonPath("$.[*].startTime").value(hasItem(sameInstant(DEFAULT_START_TIME))))
+            .andExpect(jsonPath("$.[*].endTime").value(hasItem(sameInstant(DEFAULT_END_TIME))));
     }
     
     @Test
@@ -210,8 +177,8 @@ public class ScheduleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(schedule.getId().intValue()))
-            .andExpect(jsonPath("$.startTime").value(DEFAULT_START_TIME.toString()))
-            .andExpect(jsonPath("$.endTime").value(DEFAULT_END_TIME.toString()));
+            .andExpect(jsonPath("$.startTime").value(sameInstant(DEFAULT_START_TIME)))
+            .andExpect(jsonPath("$.endTime").value(sameInstant(DEFAULT_END_TIME)));
     }
 
     @Test

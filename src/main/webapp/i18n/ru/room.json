@@ -2,24 +2,24 @@
   "waveAcsessConferenceApp": {
     "room": {
       "home": {
-        "title": "Rooms",
-        "createLabel": "Создать новый Room",
-        "createOrEditLabel": "Создать или отредактировать Room",
-        "notFound": "No Room found"
+        "title": "Рассписание презентаций по аудиториям",
+        "createLabel": "Создать новую аудиторию",
+        "createOrEditLabel": "Создать или отредактировать аудиторию",
+        "notFound": "Аудитория не найдена"
       },
-      "created": "Новый Room создан с идентификатором {{ param }}",
-      "updated": "Room обновлен с идентификатором {{ param }}",
-      "deleted": "Room удален с идентификатором {{ param }}",
+      "created": "Новая аудитория создана с идентификатором {{ param }}",
+      "updated": "Аудитория обновлена с идентификатором {{ param }}",
+      "deleted": "Аудитория удалена с идентификатором {{ param }}",
       "delete": {
-        "question": "Вы уверены что хотите удалить Room {{ id }}?"
+        "question": "Вы уверены что хотите удалить аудиторию {{ id }}?"
       },
       "detail": {
-        "title": "Room"
+        "title": "Аудитория"
       },
-      "roomName": "Room Name",
-      "level": "Level",
-      "capacity": "Capacity",
-      "schedules": "Schedules"
+      "roomName": "Название аудитории",
+      "level": "Этаж",
+      "capacity": "Вместительность",
+      "schedules": "Рассписание"
     }
   }
 }

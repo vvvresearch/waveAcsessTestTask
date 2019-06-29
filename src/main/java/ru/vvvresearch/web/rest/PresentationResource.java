@@ -1,6 +1,8 @@
 package ru.vvvresearch.web.rest;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import ru.vvvresearch.domain.Presentation;
+import ru.vvvresearch.security.AuthoritiesConstants;
 import ru.vvvresearch.service.PresentationService;
 import ru.vvvresearch.web.rest.errors.BadRequestAlertException;
 
@@ -54,6 +56,7 @@ public class PresentationResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/presentations")
+    @PreAuthorize("hasAnyRole(\"" + AuthoritiesConstants.ADMIN +","+AuthoritiesConstants.PRESENTER+ "\")")
     public ResponseEntity<Presentation> createPresentation(@Valid @RequestBody Presentation presentation) throws URISyntaxException {
         log.debug("REST request to save Presentation : {}", presentation);
         if (presentation.getId() != null) {
@@ -75,6 +78,7 @@ public class PresentationResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/presentations")
+    @PreAuthorize("hasAnyRole(\"" + AuthoritiesConstants.ADMIN +","+AuthoritiesConstants.PRESENTER+ "\")")
     public ResponseEntity<Presentation> updatePresentation(@Valid @RequestBody Presentation presentation) throws URISyntaxException {
         log.debug("REST request to update Presentation : {}", presentation);
         if (presentation.getId() == null) {
@@ -128,6 +132,7 @@ public class PresentationResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/presentations/{id}")
+    @PreAuthorize("hasAnyRole(\"" + AuthoritiesConstants.ADMIN +","+AuthoritiesConstants.PRESENTER+ "\")")
     public ResponseEntity<Void> deletePresentation(@PathVariable Long id) {
         log.debug("REST request to delete Presentation : {}", id);
         presentationService.delete(id);

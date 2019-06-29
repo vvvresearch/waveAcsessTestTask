@@ -21,6 +21,7 @@ const ENTITY_STATES = [...roomRoute, ...roomPopupRoute];
   declarations: [RoomComponent, RoomDetailComponent, RoomUpdateComponent, RoomDeleteDialogComponent, RoomDeletePopupComponent],
   entryComponents: [RoomComponent, RoomUpdateComponent, RoomDeleteDialogComponent, RoomDeletePopupComponent],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
+  exports: [RoomComponent, RoomDetailComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class WaveAcsessConferenceRoomModule {

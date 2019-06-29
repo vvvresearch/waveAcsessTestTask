@@ -1,5 +1,6 @@
 package ru.vvvresearch.web.rest;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.access.prepost.PreAuthorize;
 import ru.vvvresearch.domain.Room;
 import ru.vvvresearch.security.AuthoritiesConstants;
@@ -56,6 +57,7 @@ public class RoomResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/rooms")
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Room> createRoom(@Valid @RequestBody Room room) throws URISyntaxException {
         log.debug("REST request to save Room : {}", room);
         if (room.getId() != null) {
@@ -77,6 +79,7 @@ public class RoomResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/rooms")
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Room> updateRoom(@Valid @RequestBody Room room) throws URISyntaxException {
         log.debug("REST request to update Room : {}", room);
         if (room.getId() == null) {
@@ -111,6 +114,7 @@ public class RoomResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the room, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/rooms/{id}")
+
     public ResponseEntity<Room> getRoom(@PathVariable Long id) {
         log.debug("REST request to get Room : {}", id);
         Optional<Room> room = roomService.findOne(id);
@@ -124,6 +128,7 @@ public class RoomResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/rooms/{id}")
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Void> deleteRoom(@PathVariable Long id) {
         log.debug("REST request to delete Room : {}", id);
         roomService.delete(id);
