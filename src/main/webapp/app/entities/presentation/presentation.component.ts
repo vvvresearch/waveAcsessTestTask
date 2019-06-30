@@ -128,4 +128,8 @@ export class PresentationComponent implements OnInit, OnDestroy {
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }
+
+  hasAnyAuthorities(roles: string[]) {
+    return this.accountService.hasAnyAuthority(roles);
+  }
 }

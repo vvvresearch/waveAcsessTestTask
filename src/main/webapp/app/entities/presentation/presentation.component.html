@@ -39,7 +39,7 @@
                         <button type="submit"
                                 [routerLink]="['/presentation', presentation.id, 'edit']"
                                 class="btn btn-primary btn-sm"
-                                *ngIf = "accountService.hasAnyAuthority(['ROLE_PRESENTER', 'ROLE_ADMIN'])"
+                                *ngIf = "hasAnyAuthorities(['ROLE_PRESENTER', 'ROLE_ADMIN'])"
                                 >
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
@@ -49,7 +49,7 @@
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm"
-                                *ngIf = "accountService.hasAnyAuthority(['ROLE_PRESENTER', 'ROLE_ADMIN'])">
+                                *ngIf = "hasAnyAuthorities(['ROLE_PRESENTER', 'ROLE_ADMIN'])">
                             <fa-icon [icon]="'times'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
