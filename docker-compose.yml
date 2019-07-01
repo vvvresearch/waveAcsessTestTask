@@ -1,0 +1,19 @@
+version: '2'
+services:
+  waveacsessconference-app:
+    image: waveacsessconference
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - 'SPRING_PROFILES_ACTIVE=prod,swagger'
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - 'SPRING_DATASOURCE_URL=jdbc:mysql://waveacsessconference-mysql:3306/waveacsessconference?useUnicode=true&characterEncoding=utf8&useSSL=false'
+      - JHIPSTER_SLEEP=30
+    ports:
+      - '8080:8080'
+  waveacsessconference-mysql:
+    image: 'mysql:8.0.16'
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=waveacsessconference
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
