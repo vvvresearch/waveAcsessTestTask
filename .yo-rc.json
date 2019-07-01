@@ -34,6 +34,10 @@
     "otherModules": [],
     "enableTranslation": true,
     "nativeLanguage": "en",
-    "languages": ["en", "ru"]
+    "languages": ["en", "ru"],
+    "appsFolders": ["WaveAcsessTestTask"],
+    "directoryPath": "../",
+    "monitoring": "no",
+    "jwtSecretKey": "MzA1NjIwMjQ2NDAxYzQzYzhjNDZiYzM2ZDc5MWUxNWQ4MDFhOTY1OTdmNWE4NTQxYTZiMDRlMzAxZWFkNWJiYzM0ZjI4N2E3ZTA3OWI3ZmVjZjM1OTNjMTFhYzQzNjNiOWIyZQ=="
   }
 }

@@ -34,8 +34,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/WaveAcsessConference?useUnicode=true&characterEncoding=cp1252&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: conference
-    password: Smit_and_vesson123
+    username: root
+    password:
     hikari:
       poolName: Hikari
       auto-commit: false
