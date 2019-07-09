@@ -15,5 +15,5 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long>{
-    boolean existsScheduleByStartTimeBetweenAndRoom(ZonedDateTime startTime, ZonedDateTime startTime2, Room room);
+    boolean existsScheduleByStartTimeAfterAndEndTimeBeforeAndRoom(ZonedDateTime startTime, ZonedDateTime endTime, Room room);
 }

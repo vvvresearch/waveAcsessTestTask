@@ -41,7 +41,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         log.debug("Request to save Schedule : {}", schedule);
 //        List<Schedule> schedules = scheduleRepository.findSchedulesByStartTimeIsBetweenAndRoom(schedule.getStartTime(),schedule.getEndTime(),schedule.getRoom());
 //        schedules.forEach(schedule1 -> {log.debug(schedule1.toString());});
-        if (!scheduleRepository.existsScheduleByStartTimeBetweenAndRoom(schedule.getStartTime(),schedule.getEndTime(),schedule.getRoom())) {
+        if (!scheduleRepository.existsScheduleByStartTimeAfterAndEndTimeBeforeAndRoom(schedule.getStartTime(),schedule.getEndTime(),schedule.getRoom())) {
             return scheduleRepository.save(schedule);
         }
         else throw new BadTimeForScheduleEntity();
